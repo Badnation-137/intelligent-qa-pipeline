@@ -1,0 +1,9 @@
+# Virtual Environment
+qa-env/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Data & Results
+data/*.db
+data/results/*.png
