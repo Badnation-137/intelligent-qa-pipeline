@@ -26,9 +26,6 @@ jobs:
         pip install pytest playwright requests pytest-json-report
         playwright install chromium
 
-    - name: Create results directory
-      run: mkdir -p data/results
-
     - name: Run UI & API Tests
       run: |
         pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
