@@ -31,7 +31,7 @@ jobs:
         pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 
     - name: Upload test report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4   # ✅ Sudah diperbaiki dari v3 ke v4
       with:
         name: test-results
         path: data/results/pytest-report.json
