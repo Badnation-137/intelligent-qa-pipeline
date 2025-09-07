@@ -10,11 +10,11 @@ PASSWORD = "Grimchannel141!"
 @pytest.mark.ui
 def test_login_demoqa():
     with sync_playwright() as p:
-        # Jalankan browser (headless=False agar bisa lihat prosesnya)
-        browser = p.chromium.launch(headless=False, slow_mo=500)  # slow_mo: jeda 500ms tiap aksi
+        # Jalankan browser tanpa tampilan (wajib di GitHub Actions)
+        browser = p.chromium.launch(headless=True, slow_mo=0)
         page = browser.new_page()
 
-        # Buka halaman login
+        # Buka halaman login → PASTIKAN TIDAK ADA SPASI!
         page.goto("https://demoqa.com/login")
 
         # Isi form login
@@ -30,7 +30,7 @@ def test_login_demoqa():
         # Verifikasi login berhasil (cek ada teks "Profile")
         assert page.is_visible("text=Profile"), "Login gagal: Tidak menemukan teks 'Profile'"
 
-        # Ambil hasil screenshot (opsional, untuk dokumentasi)
+        # Ambil screenshot (masih bisa jalan meski headless=True)
         page.screenshot(path="data/results/login_success.png")
 
         # Tutup browser
