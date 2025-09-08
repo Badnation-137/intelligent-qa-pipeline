@@ -25,7 +25,7 @@ def test_login_demoqa():
         page.click("#login")
 
         # Tunggu halaman redirect
-        page.wait_for_timeout(2000)
+        page.wait_for_load_state("networkidle", timeout=10000)  # 10 detik
 
         # Verifikasi login berhasil (cek ada teks "Profile")
         assert page.is_visible("text=Profile"), "Login gagal: Tidak menemukan teks 'Profile'"
