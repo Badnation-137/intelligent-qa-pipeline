@@ -31,7 +31,21 @@ jobs:
         pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 
     - name: Upload test report
-      uses: actions/upload-artifact@v4   # ✅ Sudah diperbaiki dari v3 ke v4
+      uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: data/results/pytest-report.json
+
+    # 🔽 TAMBAHKAN DUA LANGKAH BARU DI BAWAH INI:
+    - name: Save historical report
+      run: |
+        mkdir -p history
+        cp data/results/pytest-report.json history/report_$(date +%Y%m%d_%H%M%S).json
+      if: success()
+
+    - name: Upload history
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-history
+        path: history/
+        retention-days: 30
