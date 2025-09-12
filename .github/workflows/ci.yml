@@ -31,9 +31,24 @@ jobs:
       run: |
         python ai/predict_risk.py
 
-    - name: Run UI & API Tests
+    # 🔽 LANGKAH BARU: Urutkan test berdasarkan risiko
+    - name: ⚡ Prioritize Tests by Risk
       run: |
-        pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
+        python ai/prioritize_tests.py
+
+    # 🔽 JALANKAN TEST SESUAI URUTAN RISIKO
+    - name: Run High-Risk Tests First
+      run: |
+        if [ -f "data/prioritized_tests.txt" ]; then
+          echo "🔁 Menjalankan test sesuai prioritas (high-risk first)..."
+          while IFS= read -r test; do
+            echo "🏃 Menjalankan: $test"
+            pytest "$test" --json-report --json-report-file="data/results/pytest-report.json"
+          done < data/prioritized_tests.txt
+        else
+          echo "⚠️ File prioritas tidak ditemukan. Jalankan semua test."
+          pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
+        fi
 
     - name: Upload test report
       uses: actions/upload-artifact@v4
