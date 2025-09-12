@@ -24,7 +24,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest playwright requests pytest-json-report
+        pip install scikit-learn joblib pandas
         playwright install chromium
+
+    - name: 🔮 Predict Test Failure Risk
+      run: |
+        python ai/predict_risk.py
 
     - name: Run UI & API Tests
       run: |
@@ -36,7 +41,6 @@ jobs:
         name: test-results
         path: data/results/pytest-report.json
 
-    # 🔽 TAMBAHKAN DUA LANGKAH BARU DI BAWAH INI:
     - name: Save historical report
       run: |
         mkdir -p history
