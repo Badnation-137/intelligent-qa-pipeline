@@ -12,19 +12,20 @@ def test_login_demoqa():
         browser = p.chromium.launch(headless=True, slow_mo=0)
         page = browser.new_page()
 
-        # ✅ URL tanpa spasi!
+        # ✅ URL benar-benar tanpa spasi!
         page.goto("https://demoqa.com/login")
 
         page.fill("#userName", USERNAME)
         page.fill("#password", PASSWORD)
         page.click("#login")
 
-        # ✅ Tunggu sampai jaringan selesai
+        # Tunggu halaman selesai load
         page.wait_for_load_state("networkidle", timeout=10000)
 
+        # Verifikasi login berhasil
         assert page.is_visible("text=Profile"), "Login gagal: Tidak menemukan teks 'Profile'"
-        
-        # ✅ Ambil screenshot (bisa jalan meski headless)
+
+        # Ambil screenshot
         page.screenshot(path="data/results/login_success.png")
 
         browser.close()
