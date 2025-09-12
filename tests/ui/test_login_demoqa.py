@@ -19,8 +19,11 @@ def test_login_demoqa():
         page.fill("#password", PASSWORD)
         page.click("#login")
 
-        # Tunggu halaman selesai load
-        page.wait_for_load_state("networkidle", timeout=10000)
+        # 🔧 Fix: pakai load state yang lebih stabil di CI
+        try:
+            page.wait_for_url("**/profile", timeout=15000)
+        except:
+            page.wait_for_load_state("load", timeout=15000)
 
         # Verifikasi login berhasil
         assert page.is_visible("text=Profile"), "Login gagal: Tidak menemukan teks 'Profile'"
