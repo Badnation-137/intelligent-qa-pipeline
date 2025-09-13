@@ -99,7 +99,14 @@ pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 
 ## 🐍 Play With Me!
 
+### 🌞 Light Mode
 ![Snake animation](https://raw.githubusercontent.com/Badnation-137/intelligent-qa-pipeline/output/github-contribution-grid-snake.svg)
+
+### 🌙 Dark Mode
+![Snake animation dark](https://raw.githubusercontent.com/Badnation-137/intelligent-qa-pipeline/output/github-contribution-grid-snake-dark.svg)
+
+### 🌊 Ocean Mode
+![Snake animation ocean](https://raw.githubusercontent.com/Badnation-137/intelligent-qa-pipeline/output/github-contribution-grid-snake-ocean.svg)
 
 
 ---
