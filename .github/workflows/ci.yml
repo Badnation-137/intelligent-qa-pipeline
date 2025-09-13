@@ -35,10 +35,13 @@ jobs:
       run: |
         npm install -g newman
 
-    # 🔮 PREDIKSI RISIKO KEGAGALAN DENGAN AI
-    - name: 🔮 Predict Test Failure Risk
+    # 🔮 PREDIKSI RISIKO KEGAGALAN DENGAN MODEL AI
+    - name: 🔮 Predict Test Failure Risk & Alert to Jira
       run: |
         python ai/predict_risk.py
+      env:
+        JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+        JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
 
     # ⚡ PRIORITAS BERDASARKAN RISIKO
     - name: ⚡ Prioritize High-Risk Tests
@@ -67,15 +70,18 @@ jobs:
           --reporters cli,json \
           --reporter-json-export data/results/api-report.json
 
+    # 🕵️ DETEKSI FLAKY TEST & LAPORKAN KE JIRA
+    - name: 🕵️ Detect Flaky Tests & Report to Jira
+      run: |
+        python scripts/detect_flaky.py
+      env:
+        JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+        JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+
     # 📊 GENERATE QUALITY DASHBOARD
     - name: 📊 Generate Quality Dashboard
       run: |
         python dashboard/quality_dashboard.py
-
-    # 🔍 DETEKSI FLAKY TEST
-    - name: 🕵️ Detect Flaky Tests
-      run: |
-        python scripts/detect_flaky.py
 
     # 💾 SIMPAN HASIL TERBARU
     - name: 📥 Upload Latest Test Report

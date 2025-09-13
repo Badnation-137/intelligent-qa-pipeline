@@ -1,44 +1,119 @@
-# 🚀 Intelligent QA Pipeline
+<h1 align="center">🚀 Intelligent QA Pipeline</h1>
 
-Sistem **Quality Assurance Otomatis Berbasis AI & CI/CD**  
-Menggabungkan otomasi UI, API, dan analisis data untuk prediksi kualitas otomatis.
+<p align="center">
+  <b>AI-Powered QA Automation with CI/CD + Jira Integration</b><br/>
+  <i>Modern, Reliable, Scalable</i>
+</p>
 
-## 📊 Status CI/CD
-
-![CI Pipeline](https://github.com/Badnation-137/intelligent-qa-pipeline/actions/workflows/ci.yml/badge.svg)
-
-> Ganti `username` dengan username GitHub kamu
-
-## ✅ Fitur Utama
-
-- ✅ Otomasi UI dengan Playwright
-- ✅ Otomasi API dengan `requests`
-- ✅ Jalankan otomatis di GitHub Actions
-- ✅ Laporan JSON otomatis
-- ✅ Histori hasil tes tersimpan (`history/`)
-- 🚀 Siap untuk AI & prediksi kegagalan
-
-## 🧪 Struktur Proyek
-intelligent-qa-pipeline/
-├── tests/
-│ ├── ui/ # Otomasi web
-│ └── api/ # Otomasi API
-├── data/results/ # Hasil tes terbaru
-├── history/ # Histori hasil tes (untuk AI)
-├── .github/workflows/ # CI/CD automation
-└── README.md
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/Badnation-137/intelligent-qa-pipeline/ci.yml?branch=main&logo=github&label=CI%20Pipeline" />
+  <img src="https://img.shields.io/badge/Made%20with-Python%203.10-blue?logo=python" />
+  <img src="https://img.shields.io/badge/Tests-Pytest%20%2B%20Playwright-green?logo=pytest" />
+  <img src="https://img.shields.io/badge/AI-Scikit--learn%20%2B%20Pandas-orange?logo=scikitlearn" />
+  <img src="https://img.shields.io/badge/License-MIT-purple" />
+</p>
 
 ---
 
+## ✨ Features
 
-## 🚀 Cara Menjalankan
+- 🔮 **AI-Powered Risk Prediction** – Machine Learning predicts test failure risk  
+- ⚡ **High-Risk First Execution** – Prioritize risky tests first  
+- 🤖 **Automated UI Testing** – Playwright + Pytest (headless)  
+- 🌐 **API Testing** – Postman + Newman CLI  
+- 📊 **Quality Dashboard** – Trend analysis & metrics  
+- 🕵️ **Flaky Test Detection** – Identify unstable tests  
+- 🛠️ **Jira Integration** – Auto-create issues for failures  
+- ☁️ **CI/CD on GitHub Actions** – Triggered on push  
 
-### Lokal
+---
+
+## 📂 Project Structure
+
+```text
+intelligent-qa-pipeline/
+├── .github/workflows/ci.yml        # CI/CD Pipeline
+├── tests/                          # UI & API Tests
+├── ai/                             # AI Models & Prediction
+├── scripts/                        # Helper Scripts
+├── postman/                        # API Collections
+├── dashboard/                      # Quality Reports
+├── jira-integration/               # Jira Integration
+├── data/results/                   # Test Results
+├── history/                        # Historical Reports
+└── README.md                       # Project Documentation
+```
+
+---
+
+## 🔄 Workflow Overview
+
+```mermaid
+graph TD
+    A[Push Code] --> B[Run CI/CD]
+    B --> C[Setup Python + Dependencies]
+    C --> D[AI Risk Prediction]
+    D --> E[Prioritize High-Risk Tests]
+    E --> F[Run UI & API Automation]
+    F --> G[Save Results & History]
+    G --> H[Detect Flaky + Jira Ticket]
+    H --> I[Quality Dashboard]
+```
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/predict_risk.png" width="400" />
+  <img src="docs/screenshots/flaky_detected.png" width="400" />
+</p>
+
+---
+
+## 🚀 Quickstart
+
+### Local
 ```bash
-# Aktifkan virtual environment
-source qa-env/bin/activate  # Linux/macOS
-# atau
-qa-env\Scripts\activate     # Windows
+# Activate virtual environment
+source qa-env/bin/activate   # Linux/macOS
+qa-env\Scripts\activate      # Windows
 
-# Jalankan semua test
+# Run all tests
 pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
+```
+
+### Cloud
+> Automatically runs in **GitHub Actions** when you push to `main`.
+
+---
+
+## 📦 Artifacts
+
+| Artifact | Content | Usage |
+|----------|---------|-------|
+| `test-results` | `pytest-report.json` | Debugging latest run |
+| `test-history` | All `report_*.json` | AI training & trend analysis |
+
+---
+
+## 📅 Roadmap
+
+- [ ] 🌐 Add Grafana dashboard  
+- [ ] 🤖 Self-healing tests (auto-fix selectors)  
+- [ ] 🔔 Slack/Discord notifications  
+- [ ] 📈 Advanced analytics with Plotly  
+
+---
+
+## 🐍 Contribution Snake
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Badnation-137/workforce-skill-gap/output/dist/standalone-snake-synthwave.svg" alt="Snake animation"/>
+</p>
+
+---
+
+## 🙌 Author
+
+Created with ❤️ by [**Badnation-137**](https://github.com/Badnation-137)
