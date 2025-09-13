@@ -62,15 +62,6 @@ graph TD
 
 ---
 
-## 📸 Screenshots
-
-<p align="center">
-  <img src="docs/screenshots/predict_risk.png" width="400" />
-  <img src="docs/screenshots/flaky_detected.png" width="400" />
-</p>
-
----
-
 ## 🚀 Quickstart
 
 ### Local
@@ -106,7 +97,7 @@ pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 
 ---
 
-## 🐍 Contribution Snake
+## 🐍 Play With Me!
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Badnation-137/workforce-skill-gap/output/dist/standalone-snake-synthwave.svg" alt="Snake animation"/>
@@ -116,4 +107,4 @@ pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 
 ## 🙌 Author
 
-Created with ❤️ by [**Badnation-137**](https://github.com/Badnation-137)
+[**Badnation-137**](https://github.com/Badnation-137)
