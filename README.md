@@ -99,7 +99,8 @@ pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 
 ## 🐍 Play With Me!
 
-![Snake animation](https://raw.githubusercontent.com/Badnation-137/intelligent-qa-pipeline/output/dist/github-contribution-grid-snake.svg)
+![Snake animation](https://raw.githubusercontent.com/Badnation-137/intelligent-qa-pipeline/output/github-contribution-grid-snake.svg)
+
 
 ---
 
