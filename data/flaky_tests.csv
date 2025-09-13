@@ -1,0 +1,3 @@
+test_name,flipped
+tests/api/test_api_users.py::test_get_all_users,1
+tests/ui/test_login_demoqa.py::test_login_demoqa,1

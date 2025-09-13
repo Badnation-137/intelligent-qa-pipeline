@@ -1,0 +1,7 @@
+Date,Time,Test,Outcome,Duration (s)
+2025-09-08,13:31,tests/api/test_api_users.py::test_get_all_users,PASSED,0.065
+2025-09-08,13:31,tests/ui/test_login_demoqa.py::test_login_demoqa,PASSED,9.254
+2025-09-08,13:52,tests/api/test_api_users.py::test_get_all_users,PASSED,0.214
+2025-09-08,13:52,tests/ui/test_login_demoqa.py::test_login_demoqa,PASSED,7.531
+2025-09-12,23:05,tests/api/test_api_users.py::test_get_all_users,PASSED,0.075
+2025-09-12,23:05,tests/ui/test_login_demoqa.py::test_login_demoqa,PASSED,4.8
