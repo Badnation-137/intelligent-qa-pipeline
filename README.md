@@ -98,13 +98,10 @@ pytest tests/ --json-report --json-report-file=data/results/pytest-report.json
 ---
 
 ## 🐍 Play With Me!
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Badnation-137/workforce-skill-gap/output/dist/standalone-snake-synthwave.svg" alt="Snake animation"/>
-</p>
+![Snake animation](https://raw.githubusercontent.com/Badnation-137/intelligent-qa-pipeline/output/dist/github-contribution-grid-snake.svg)
 
 ---
 
 ## 🙌 Author
 
-[**Badnation-137**](https://github.com/Badnation-137)
+AB7 a.k.a[**Badnation-137**](https://github.com/Badnation-137)
