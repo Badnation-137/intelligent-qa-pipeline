@@ -3,7 +3,7 @@ name: Generate Snake Animation
 on:
   schedule:
     - cron: "0 0 * * *"   # jalan tiap hari jam 00:00 UTC
-  workflow_dispatch:       # bisa dijalankan manual dari Actions
+  workflow_dispatch:       # bisa dijalankan manual dari Actions tab
 
 jobs:
   build:
@@ -18,10 +18,10 @@ jobs:
       - name: Generate Snake Animation
         uses: Platane/snk@v3
         with:
-          github_user_name: Badnation-137
+          github_user_name: ${{ github.repository_owner }}
           outputs: dist/github-contribution-grid-snake.svg
 
-      - name: Deploy to output branch
+      - name: Push Snake Animation to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
