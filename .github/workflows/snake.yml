@@ -1,36 +1,47 @@
-name: Generate Snake
+# .github/workflows/snake.yml
 
+name: Generate 3D Snake Animation
+
+# Jalankan setiap 6 jam dan saat ada push ke branch utama
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 */6 * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: write  # ⬅️ ini WAJIB supaya bisa push branch output
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Generate Snake Animation
+      - name: Generate 3D Snake SVG
         uses: Platane/snk@v3
         with:
-          github_user_name: Badnation-137
-          outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            dist/github-contribution-grid-snake-ocean.svg?palette=ocean
+          # Username GitHub Anda (otomatis terdeteksi)
+          github_user_name: ${{ github.repository_owner }}
 
-      - name: Push Snake to Output Branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
-        with:
-          target_branch: output
-          build_dir: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Daftar output yang akan dihasilkan dengan berbagai kustomisasi
+          outputs: |
+            # 1. Tampilan 3D untuk Tema Gelap (DARK MODE)
+            # - view: isometric (untuk efek 3D)
+            # - color_snake: #80f0ff (biru cyan terang)
+            # - color_dots: gradasi warna ungu ke pink
+            dist/github-snake-3d-dark.svg?palette=github-dark&view=isometric&color_snake=#80f0ff&color_dots=#450359,#6a0780,#8f0aa8,#b511d1,#d71ee8
+
+            # 2. Tampilan Klasik untuk Tema Terang (LIGHT MODE)
+            # - Tampilan klasik yang bersih
+            # - color_snake: #004AAD (biru tua)
+            # - color_dots: gradasi warna abu-abu
+            dist/github-snake-light.svg?palette=github-light&color_snake=#004AAD&color_dots=#d1d1d1,#b2b2b2,#8f8f8f,#6d6d6d,#4a4a4a
+
+            # 3. (BONUS) Animasi Ular Saja (tanpa grid) dengan efek neon
+            dist/github-snake-neon.svg?palette=github-dark&color_snake=#f75394&color_dots=#00000000
+
+      - name: Push to a separate branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add dist
+          git commit -m "Generate contribution snake" || exit 0
+          git push
