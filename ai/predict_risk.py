@@ -82,7 +82,7 @@ def predict_risk():
         print(f'   Probabilitas Gagal: {prob:.2%}\n')
 
         # 🔥 Auto-create ticket di Jira jika risiko tinggi & test UI
-        if create_jira_task is not None and prob > 0.5 and "ui" in name.lower():
+        if create_jira_task is not None and prob > 0.15 and "ui" in name.lower():
             create_jira_task(
                 summary=f"🚨 High Risk Detected: {name}",
                 description_text=f"Model AI memprediksi bahwa test UI `{name}` memiliki probabilitas gagal sebesar {prob:.2%}. Disarankan segera diperiksa oleh tim dev/QA."
