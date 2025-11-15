@@ -3,7 +3,20 @@
 import os
 import json
 import pandas as pd
-from jira_integration.create_issue import create_jira_task  # Import fungsi Jira
+import sys  # Untuk tambahkan path manual
+
+# 🔧 Tambahkan path ke jira_integration secara manual
+jira_path = os.path.join(os.path.dirname(__file__), '..', 'jira_integration')
+if jira_path not in sys.path:
+    sys.path.append(jira_path)
+
+# Sekarang coba import
+try:
+    from create_issue import create_jira_task
+    print("✅ Berhasil import create_jira_task")
+except ImportError as e:
+    print(f"❌ Gagal import: {e}")
+    create_jira_task = None
 
 def detect_flaky_tests():
     """Deteksi test yang sering berganti status (flaky)"""
@@ -55,11 +68,14 @@ def detect_flaky_tests():
         print(f"   Jumlah perubahan status: {int(row['flipped'])}\n")
 
     # 🔥 BUAT TICKET OTOMATIS DI JIRA
-    create_jira_task(
-        summary=f"🔁 Flaky Test(s) Detected ({len(flaky_tests)} test)",
-        description_text=f"Terdeteksi {len(flaky_tests)} test tidak stabil. Disarankan untuk diperiksa karena bisa menyebabkan false positive/negative.\n\nDaftar test:\n" + 
-                         "\n".join([f"- `{row['test_name']}`: {int(row['flipped'])}x change" for _, row in flaky_tests.iterrows()])
-    )
+    if create_jira_task is not None:
+        create_jira_task(
+            summary=f"🔁 Flaky Test(s) Detected ({len(flaky_tests)} test)",
+            description_text=f"Terdeteksi {len(flaky_tests)} test tidak stabil. Disarankan untuk diperiksa karena bisa menyebabkan false positive/negative.\n\nDaftar test:\n" +
+                             "\n".join([f"- `{row['test_name']}`: {int(row['flipped'])}x change" for _, row in flaky_tests.iterrows()])
+        )
+    else:
+        print("⚠️ Tidak bisa buat ticket di Jira: create_jira_task tidak tersedia.")
 
     # Simpan hasil
     flip_count.to_csv("data/flaky_tests.csv", index=False)
@@ -67,14 +83,3 @@ def detect_flaky_tests():
 
 if __name__ == "__main__":
     detect_flaky_tests()
-
-# scripts/detect_flaky.py
-
-# ... kode sebelumnya ...
-
-if len(flaky_tests) > 0:
-    create_jira_task(
-        summary="🔁 Flaky Test(s) Detected",
-        description_text=f"Terdeteksi {len(flaky_tests)} test tidak stabil. Perlu investigasi.\n\n"
-                        + "\n".join([f"- `{row['test_name']}`: {int(row['flipped'])}x change" for _, row in flaky_tests.iterrows()])
-    )
