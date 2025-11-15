@@ -3,6 +3,7 @@
 import os
 import json
 import pandas as pd
+from jira_integration.create_issue import create_jira_task  # Import fungsi Jira
 
 def detect_flaky_tests():
     """Deteksi test yang sering berganti status (flaky)"""
@@ -42,19 +43,38 @@ def detect_flaky_tests():
     df['flipped'] = df['outcome'] != df['prev_outcome']
 
     flip_count = df.groupby("test_name")["flipped"].sum().reset_index()
-    flip_count = flip_count[flip_count["flipped"] > 0]
+    flaky_tests = flip_count[flip_count["flipped"] > 0]
 
-    if len(flip_count) == 0:
+    if len(flaky_tests) == 0:
         print("✅ Tidak ada flaky test terdeteksi.")
         return
 
     print("\n🟡 FLAKY TEST DETECTED:\n")
-    for _, row in flip_count.iterrows():
+    for _, row in flaky_tests.iterrows():
         print(f"🔁 {row['test_name']}")
         print(f"   Jumlah perubahan status: {int(row['flipped'])}\n")
 
+    # 🔥 BUAT TICKET OTOMATIS DI JIRA
+    create_jira_task(
+        summary=f"🔁 Flaky Test(s) Detected ({len(flaky_tests)} test)",
+        description_text=f"Terdeteksi {len(flaky_tests)} test tidak stabil. Disarankan untuk diperiksa karena bisa menyebabkan false positive/negative.\n\nDaftar test:\n" + 
+                         "\n".join([f"- `{row['test_name']}`: {int(row['flipped'])}x change" for _, row in flaky_tests.iterrows()])
+    )
+
+    # Simpan hasil
     flip_count.to_csv("data/flaky_tests.csv", index=False)
     print("✅ Hasil disimpan: data/flaky_tests.csv")
 
 if __name__ == "__main__":
     detect_flaky_tests()
+
+# scripts/detect_flaky.py
+
+# ... kode sebelumnya ...
+
+if len(flaky_tests) > 0:
+    create_jira_task(
+        summary="🔁 Flaky Test(s) Detected",
+        description_text=f"Terdeteksi {len(flaky_tests)} test tidak stabil. Perlu investigasi.\n\n"
+                        + "\n".join([f"- `{row['test_name']}`: {int(row['flipped'])}x change" for _, row in flaky_tests.iterrows()])
+    )

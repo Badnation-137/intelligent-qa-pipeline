@@ -5,18 +5,13 @@ import json
 from config import JIRA_URL, JIRA_EMAIL, JIRA_TOKEN, PROJECT_KEY, ISSUE_TYPE
 
 def create_jira_task(summary, description_text, priority="Medium"):
-    """
-    Buat task baru di Jira dengan format ADF untuk deskripsi
-    """
     url = f"{JIRA_URL}/rest/api/3/issue"
-    
     auth = (JIRA_EMAIL, JIRA_TOKEN)
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json"
     }
 
-    # 📄 Format ADF (Atlassian Document Format)
     description_adf = {
         "version": 1,
         "type": "doc",
@@ -24,10 +19,7 @@ def create_jira_task(summary, description_text, priority="Medium"):
             {
                 "type": "paragraph",
                 "content": [
-                    {
-                        "type": "text",
-                        "text": description_text
-                    }
+                    {"type": "text", "text": description_text}
                 ]
             }
         ]
@@ -39,16 +31,11 @@ def create_jira_task(summary, description_text, priority="Medium"):
             "summary": summary,
             "issuetype": {"name": ISSUE_TYPE},
             "priority": {"name": priority},
-            "description": description_adf  # 👈 Pakai ADF, bukan string biasa
+            "description": description_adf
         }
     }
 
-    response = requests.post(
-        url,
-        data=json.dumps(payload),
-        auth=auth,
-        headers=headers
-    )
+    response = requests.post(url, data=json.dumps(payload), auth=auth, headers=headers)
 
     if response.status_code == 201:
         issue_key = response.json().get("key")
